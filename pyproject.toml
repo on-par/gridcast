@@ -1,0 +1,41 @@
+[project]
+name = "gridcast"
+version = "0.1.0"
+description = "Small reports over ERCOT hourly grid load data. A Software Factory demo for PyTexas 2027."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Patrick Robinson" }]
+requires-python = ">=3.13"
+dependencies = ["typer>=0.12"]
+
+[project.scripts]
+gridcast = "gridcast.cli:app"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.100",
+    "pyright>=1.1.380",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.pyright]
+include = ["src", "tests"]
+typeCheckingMode = "strict"
+pythonVersion = "3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=gridcast --cov-branch --cov-report=term-missing --cov-fail-under=100"
